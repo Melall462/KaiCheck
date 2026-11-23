@@ -26,6 +26,8 @@ export const addDays = (k, n) => {
 };
 export const fmtDate = (k, opts) => parseKey(k).toLocaleDateString('en-NZ', opts);
 export const TODAY_KEY = dateKey();
+export const fmtTime = (iso) =>
+  new Date(iso).toLocaleTimeString('en-NZ', { hour: 'numeric', minute: '2-digit', hour12: true }).replace(/\s/g, ' ');
 
 /** Sample data used on first load and on "Reset sample data". */
 export const seed = {

@@ -157,3 +157,13 @@ button.card:hover{border-color:var(--accent)}
 .confirm .state{font-size:.85rem;font-weight:600;color:var(--accent)}
 .confirm.todo .state{color:var(--danger)}
 .dayrow{text-align:left}
+
+.authwrap{max-width:460px;margin:0 auto;padding:40px 16px}
+.authpanel{margin-top:16px}
+.authpanel h2{font-size:1.4rem;margin-bottom:8px}
+.authform{display:flex;flex-direction:column;gap:12px}
+.steps{padding-left:20px;display:flex;flex-direction:column;gap:6px}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background:var(--surface2);padding:1px 6px;border-radius:6px}
+.who{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted)}
+.who b{color:var(--ink)}
+.admin{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-bottom:12px}

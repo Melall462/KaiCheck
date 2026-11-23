@@ -24,19 +24,17 @@ export default function Header({ view, setView }) {
           </svg>
           <div>
             <b>KaiCheck</b>
-            <span>Little Kererū Early Learning</span>
+            <span>{state.profile.centreName}</span>
           </div>
         </div>
-        <label className="role">
-          Viewing as
-          <select id="role" value={state.role} onChange={(e) => actions.setRole(e.target.value)}>
-            {Object.entries(ROLES).map(([k, v]) => (
-              <option key={k} value={k}>
-                {v}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className="who">
+          <span>
+            <b>{state.profile.name}</b> · {ROLES[state.role]}
+          </span>
+          <button className="btn small" onClick={actions.auth.signOut}>
+            Sign out
+          </button>
+        </div>
       </div>
       <nav aria-label="Sections">
         {NAV.map(([k, label]) => (

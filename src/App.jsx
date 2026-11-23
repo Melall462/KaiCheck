@@ -6,11 +6,22 @@ import Header from './components/Header.jsx';
 import History from './components/History.jsx';
 import Log from './components/Log.jsx';
 import ModalHost from './components/Modals.jsx';
+import { Loading, SetupNeeded, ErrorScreen, SignIn, Onboarding } from './components/Auth.jsx';
 import { TODAY_KEY } from './data';
 import { useStore } from './store.jsx';
 
 export default function App() {
-  const { actions } = useStore();
+  const { state } = useStore();
+  if (state.phase === 'unconfigured') return <SetupNeeded />;
+  if (state.phase === 'loading') return <Loading />;
+  if (state.phase === 'error') return <ErrorScreen message={state.error} />;
+  if (state.phase === 'signedout') return <SignIn />;
+  if (state.phase === 'onboarding') return <Onboarding />;
+  return <Ready />;
+}
+
+function Ready() {
+  const { state, actions } = useStore();
   const [view, setViewRaw] = useState('log');
   const [date, setDate] = useState(TODAY_KEY);
   const [modal, setModal] = useState(null);
@@ -36,10 +47,22 @@ export default function App() {
         {view === 'board' && <Board />}
       </main>
       <div className="foot">
-        Data is saved in this browser only. There is no backend yet.{' '}
-        <button className="btn small" onClick={actions.reset}>
-          Reset sample data
-        </button>
+        {state.role === 'manager' && (
+          <div className="admin">
+            <span>
+              Staff join code: <code>{state.profile.joinCode}</code>
+            </span>
+            <button className="btn small" onClick={actions.rotateJoinCode}>
+              New code
+            </button>
+            {state.children.length === 0 && state.dishes.length === 0 && (
+              <button className="btn small" onClick={actions.loadSample}>
+                Add sample children and dishes
+              </button>
+            )}
+          </div>
+        )}
+        Signed in to {state.profile.centreName}. Children are listed by first name and last initial only.
       </div>
       <ModalHost modal={modal} setModal={setModal} />
     </>

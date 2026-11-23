@@ -20,7 +20,7 @@ export default function Log({ date, setDate, openModal }) {
       <div className="page-h">
         <div>
           <h1>Food log</h1>
-          <p>What was served at Little Kererū Early Learning</p>
+          <p>What was served at {state.profile.centreName}</p>
         </div>
       </div>
 
